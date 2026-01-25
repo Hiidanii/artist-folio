@@ -1397,7 +1397,94 @@ section,
 # Estilos modificados
 --------------------------------------------------------------*/
 
-/* Carrusel de imágenes */
-.portfolio-details-slider {
-  width: 65%;
-}
+/* Cambios menores */
+  /* Borde redondeado para objetos */
+  .swiper-slide img {
+    border-radius: 8px;
+  }
+
+  .artist-image img {
+    border-radius: 8px;
+  }
+
+  .testimonial-item {
+    border-radius: 8px;
+  }
+
+  /* Ajustar tamaño del carrusel de imágenes */
+  .portfolio-details-slider {
+    width: 65%;
+  }
+
+  @media (max-width: 768px) {
+    .portfolio-details-slider {
+      width: 100%;
+    }
+  }
+
+  /* Color separador nav + Ocultarlo en dispositivos móviles */
+  .nav-separator {
+    color: var(--nav-color);
+  }
+
+  @media (max-width: 1199px) {
+    .nav-separator {
+      display: none;
+    }
+  }
+
+  /* Efecto hover testimonios */
+  .testimonial-item {
+    transition: transform 0.3s, background-color 0.3s;
+  }
+
+  .testimonial-item:hover {
+    transform: translateY(-8px);
+    background-color: #232222;
+  }
+
+/* Cambios más visibles */
+  /* Estilo de header y footer con degradado */
+  .header {
+    background: linear-gradient(0deg, rgba(0,0,0,0.8), color-mix(in srgb, var(--background-color) 98%, transparent));
+    border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 86%);
+  }
+
+  .footer {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--background-color) 98%, transparent), rgba(0,0,0,0.6));
+    border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 86%);
+  }
+
+  /* Efecto hover en los enlaces del menú de navegación */
+  .navmenu a {
+    position: relative;
+    z-index: 1;
+  }
+  .navmenu a::after { 
+    content: "";
+    position: absolute;
+    height: 2px;
+    left: 18%;
+    right: 18%;
+    bottom: 10px;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent-color) 80%, transparent), transparent);
+    opacity: 0;
+    transform-origin: center;
+    transition: all 0.32s cubic-bezier(.2,.9,.2,1);
+    border-radius: 2px;
+  }
+  .navmenu a:hover::after,
+  .navmenu .active::after,
+  .navmenu a:focus::after {
+    opacity: 1;
+    left: 8%;
+    right: 8%;
+    bottom: 8px;
+  }
+
+  /* Ocultar efecto hover en dispositivos móviles */
+  @media (max-width: 1199px) {
+    .navmenu a::after {
+      display: none;
+    }
+  }
