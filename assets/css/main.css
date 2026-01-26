@@ -1399,21 +1399,15 @@ section,
 
 /* Cambios menores */
   /* Borde redondeado para objetos */
-  .swiper-slide img {
-    border-radius: 8px;
-  }
-
-  .artist-image img {
-    border-radius: 8px;
-  }
-
+  .swiper-slide img,
+  .artist-image img,
   .testimonial-item {
     border-radius: 8px;
   }
 
   /* Ajustar tamaño del carrusel de imágenes */
   .portfolio-details-slider {
-    width: 65%;
+    object-fit: cover;
   }
 
   @media (max-width: 768px) {
@@ -1441,6 +1435,23 @@ section,
   .testimonial-item:hover {
     transform: translateY(-8px);
     background-color: #232222;
+  }
+
+  /* Efecto hover logo */
+  .logo h1 {
+    transition: transform 0.3s;
+  }
+
+  .logo img {
+    transition: transform 0.3s;
+  }
+
+  .logo:hover h1 {
+    transform: scale(1.05);
+  }
+
+  .logo:hover img {
+    transform: rotate(10deg);
   }
 
 /* Cambios más visibles */
