@@ -1454,6 +1454,8 @@ section,
     transform: rotate(10deg);
   }
 
+
+
 /* Cambios más visibles */
   /* Estilo de header y footer con degradado */
   .header {
@@ -1498,4 +1500,108 @@ section,
     .navmenu a::after {
       display: none;
     }
+  }
+
+
+
+/* Estilos personalizados para la sección de videos */
+  .video-item {
+    margin-bottom: 60px;
+    padding: 30px;
+    background-color: var(--surface-color);
+    border-radius: 10px;
+    transition: transform 0.3s;
+  }
+
+  .video-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .video-synopsis h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+  }
+
+  .video-synopsis h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: color-mix(in srgb, var(--default-color), transparent 30%);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .video-synopsis p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: color-mix(in srgb, var(--default-color), transparent 20%);
+  }
+
+  @media (max-width: 991px) {
+    .video-container {
+      margin-bottom: 30px;
+    }
+  }
+
+
+
+/* Estilos personalizados para la sección de premios */
+  .award-item {
+    background-color: var(--surface-color);
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+  }
+
+  .award-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .award-item h3 {
+    color: var(--accent-color);
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .award-item h4 {
+    color: color-mix(in srgb, var(--default-color), transparent 30%);
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .award-item p {
+    color: color-mix(in srgb, var(--default-color), transparent 20%);
+    line-height: 1.6;
+  }
+
+  .award-year {
+    display: inline-block;
+    background: var(--accent-color);
+    color: var(--contrast-color);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
   }
