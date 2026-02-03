@@ -66,6 +66,13 @@
           <span class="nav-separator">|</span>
           <li><a href="services.html">Servicios</a></li>
           <li><a href="contact.html" class="active">Contacto</a></li>
+          <li class="nav-search">
+            <form class="search-form" role="search" data-search-form>
+              <input type="search" name="q" placeholder="Buscar..." aria-label="Buscar" data-search-input>
+              <button type="submit" aria-label="Buscar"><i class="bi bi-search"></i></button>
+              <button type="button" class="clear-btn" data-search-clear aria-label="Limpiar"><i class="bi bi-x"></i></button>
+            </form>
+          </li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -112,7 +119,7 @@
                 <i class="bi bi-telephone flex-shrink-0"></i>
                 <div>
                   <h3>Teléfono</h3>
-                  <p>+1 800 000 0000</p>
+                  <p>+34 600 000 000</p>
                 </div>
               </div>
             </div><!-- End Info Item -->
@@ -130,7 +137,7 @@
           </div>
         </div>
 
-        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="300">
+        <form id="contact-form" action="mailto:danielfabian1207@gmail.com" method="get" enctype="text/plain" class="php-email-form" data-aos="fade-up" data-aos-delay="300">
           <div class="row gy-4">
 
             <div class="col-md-6">
@@ -150,11 +157,7 @@
             </div>
 
             <div class="col-md-12 text-center">
-              <div class="loading">Cargando</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Tu mensaje ha sido enviado. ¡Gracias!</div>
-
-              <button type="submit">Enviar Mensaje</button>
+              <button type="submit">Abrir correo</button>
             </div>
 
           </div>
@@ -186,10 +189,25 @@
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <script>
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const subject = contactForm.querySelector('[name="subject"]').value.trim();
+        const message = contactForm.querySelector('[name="message"]').value.trim();
+
+        const mailto = `mailto:danielfabian1207@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+
+        window.location.href = mailto;
+      });
+    }
+  </script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>

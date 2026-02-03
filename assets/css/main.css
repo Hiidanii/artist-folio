@@ -1562,8 +1562,6 @@ section,
     }
   }
 
-
-
 /* Estilos personalizados para la sección de premios */
   .award-item {
     background-color: var(--surface-color);
@@ -1605,3 +1603,122 @@ section,
     font-weight: 600;
     margin-bottom: 15px;
   }
+
+/* Estilos personalizados para la sección de fotos del artista */
+  .artist-photos .artist-photo-item {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    background-color: var(--surface-color);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .artist-photos .artist-photo-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .artist-photos .artist-photo-item:hover img {
+    transform: scale(1.05);
+  }
+
+/* Estilos personalizados para la sección de galería de conciertos */
+  #concert-gallery .gallery-item {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+
+  #concert-gallery .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+/* Estilos personalizados para la barra de búsqueda en el menú de navegación */
+  .navmenu .nav-search {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+  }
+
+  .navmenu .search-form {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
+    background: color-mix(in srgb, var(--surface-color), transparent 15%);
+    transition: 0.3s;
+  }
+
+  .navmenu .search-form input {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--default-color);
+    font-size: 13px;
+    width: 160px;
+  }
+
+  .navmenu .search-form button {
+    border: 0;
+    background: transparent;
+    color: var(--nav-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+  }
+
+  .navmenu .search-form button:hover {
+    color: var(--nav-hover-color);
+    background: color-mix(in srgb, var(--accent-color), transparent 85%);
+  }
+
+  .navmenu .search-form .clear-btn {
+    display: none;
+  }
+
+  .navmenu .search-form.has-value .clear-btn {
+    display: inline-flex;
+  }
+
+  @media (max-width: 1199px) {
+    .navmenu .nav-search {
+      padding: 10px 20px;
+    }
+    .navmenu .search-form {
+      width: 100%;
+    }
+    .navmenu .search-form input {
+      width: 100%;
+    }
+  }
+
+  mark.search-highlight {
+    background: color-mix(in srgb, var(--accent-color), transparent 10%);
+    color: var(--contrast-color);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+
+  /* Ocultar el botón nativo de limpiar en inputs type="search" */
+    .navmenu .search-form input[type="search"]::-webkit-search-cancel-button,
+    .navmenu .search-form input[type="search"]::-webkit-search-decoration,
+    .navmenu .search-form input[type="search"]::-webkit-search-results-button,
+    .navmenu .search-form input[type="search"]::-webkit-search-results-decoration {
+      -webkit-appearance: none;
+    }
+
+    .navmenu .search-form input[type="search"] {
+      appearance: textfield;
+    }

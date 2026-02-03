@@ -133,4 +133,104 @@
 
   window.addEventListener("load", initSwiper);
 
+  /**
+   * Navbar Search
+   */
+  const searchForms = document.querySelectorAll('[data-search-form]');
+  const highlightClass = 'search-highlight';
+
+  function clearHighlights(root) {
+    root.querySelectorAll(`mark.${highlightClass}`).forEach(mark => {
+      const parent = mark.parentNode;
+      parent.replaceChild(document.createTextNode(mark.textContent), mark);
+      parent.normalize();
+    });
+  }
+
+  function highlightMatches(root, query) {
+    if (!query) return 0;
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(escaped, 'gi');
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        const parent = node.parentElement;
+        if (!parent) return NodeFilter.FILTER_REJECT;
+        if (['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    let count = 0;
+    let node;
+    while ((node = walker.nextNode())) {
+      const text = node.nodeValue;
+      if (!regex.test(text)) continue;
+      regex.lastIndex = 0;
+
+      const fragment = document.createDocumentFragment();
+      let lastIndex = 0;
+      let match;
+
+      while ((match = regex.exec(text))) {
+        const before = text.slice(lastIndex, match.index);
+        if (before) fragment.appendChild(document.createTextNode(before));
+
+        const mark = document.createElement('mark');
+        mark.className = highlightClass;
+        mark.textContent = match[0];
+        fragment.appendChild(mark);
+
+        lastIndex = match.index + match[0].length;
+        count++;
+      }
+
+      const after = text.slice(lastIndex);
+      if (after) fragment.appendChild(document.createTextNode(after));
+
+      node.parentNode.replaceChild(fragment, node);
+    }
+
+    return count;
+  }
+
+  searchForms.forEach(form => {
+    const input = form.querySelector('[data-search-input]');
+    const clearBtn = form.querySelector('[data-search-clear]');
+    const root = document.querySelector('main');
+
+    if (!input || !root) return;
+
+    const syncState = () => {
+      form.classList.toggle('has-value', input.value.trim().length > 0);
+    };
+
+    input.addEventListener('input', syncState);
+    syncState();
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const query = input.value.trim();
+      clearHighlights(root);
+      if (!query) return;
+
+      const count = highlightMatches(root, query);
+      if (count > 0) {
+        const first = root.querySelector(`mark.${highlightClass}`);
+        if (first) {
+          first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    });
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        input.value = '';
+        syncState();
+        clearHighlights(root);
+        input.focus();
+      });
+    }
+  });
+
 })();
